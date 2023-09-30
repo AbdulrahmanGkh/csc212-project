@@ -64,5 +64,5 @@ public class Contact {
 		this.notes = notes;
 	}
 	
-//comparaple class
+//comparaple class..
 }
