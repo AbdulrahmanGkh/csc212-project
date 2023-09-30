@@ -1,11 +1,11 @@
 import java.util.Date;
 public class Contact {
-	public String name;
-	public String phoneNumber;
-	public String emailAddress;
-	public String address;
-	public Date birthday;
-	public String notes;
+	private String name;
+	private String phoneNumber;
+	private String emailAddress;
+	private String address;
+	private Date birthday;
+	private String notes;
 	
 	public Contact(String name,String phoneNumber,String emailAddres,String address,Date birthday,String notes) {
 		this.name = name;
@@ -15,6 +15,22 @@ public class Contact {
 		this.birthday = birthday;
 		this.notes = notes;
 	}
+	public int compareto(Contact otherPerson) {//bigO(n) this method compare two strings
+		if(this.name == null && otherPerson.name == null)
+			return 0;//we check if both names are nulls we return 0 that means they are equal
+ 		try {
+ 			return this.name.compareTo(otherPerson.name);
+ 		}catch (NullPointerException a) {
+ 			if (this.name == null) {
+ 				return -1; //if this case excuted then current name is null 
+ 			}
+ 			else {
+ 				return 1; //if this case excuted then otherPerson name is null  
+ 			}
+ 		}
+	}
+	
+	
 
 	public String getName() {
 		return name;
@@ -64,5 +80,5 @@ public class Contact {
 		this.notes = notes;
 	}
 	
-//comparaple class..
+
 }
