@@ -1,13 +1,13 @@
-import java.util.Date;
-public class Contact {
+
+public class Contact implements Comparable<Contact> {
 	private String name;
 	private String phoneNumber;
 	private String emailAddress;
 	private String address;
-	private Date birthday;
+	private String birthday;
 	private String notes;
 	
-	public Contact(String name,String phoneNumber,String emailAddres,String address,Date birthday,String notes) {
+	public Contact(String name,String phoneNumber,String emailAddres,String address,String birthday,String notes) {
 		this.name = name;
 		this.phoneNumber=phoneNumber;
 		this.emailAddress=emailAddress;
@@ -15,19 +15,19 @@ public class Contact {
 		this.birthday = birthday;
 		this.notes = notes;
 	}
-	public int compareto(Contact otherPerson) {//bigO(n) this method compare two strings
-		if(this.name == null && otherPerson.name == null)
-			return 0;//we check if both names are nulls we return 0 that means they are equal
- 		try {
- 			return this.name.compareTo(otherPerson.name);
- 		}catch (NullPointerException a) {
- 			if (this.name == null) {
- 				return -1; //if this case excuted then current name is null 
- 			}
- 			else {
- 				return 1; //if this case excuted then otherPerson name is null  
- 			}
- 		}
+	@Override
+	public int compareTo(Contact otherPerson)throws NullPointerException {//bigO(n) this method compare two strings
+		 if(this.name==null || otherPerson.name==null)
+			throw new NullPointerException("Please enter a valid name");
+		 else
+		 {
+		 if(this.name.equals(otherPerson.name))
+			return 0;// this means name==otherPerson
+		 else if(this.name.compareTo(otherPerson.name)<=-1)
+			return -1; // this means this.name>otherPerson
+		 else
+			 return 1;// this means otherPerson>this.name
+		 }
 	}
 	
 	
@@ -64,11 +64,11 @@ public class Contact {
 		this.address = address;
 	}
 
-	public Date getBirthday() {
+	public String getBirthday() {
 		return birthday;
 	}
 
-	public void setBirthday(Date birthday) {
+	public void setBirthday(String birthday) {
 		this.birthday = birthday;
 	}
 
