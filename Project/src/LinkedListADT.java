@@ -3,7 +3,6 @@ public class LinkedListADT <T> {
 	
 	private Node<T> head;
 	private Node<T> current;
-	private Node<T> previous;
 	
 	public LinkedListADT() {// Big O(1)
 		head = current= null;
