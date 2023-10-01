@@ -4,9 +4,11 @@ public class LinkedListADT <T> {
 	private Node<T> head;
 	private Node<T> current;
 	
+	
 	public LinkedListADT() {// Big O(1)
-		head=null;
-		current=null;
+		head = current= null;
+		
+		
 	}
 	
 	public boolean isEmpty() {// Big O(1)
@@ -19,6 +21,12 @@ public class LinkedListADT <T> {
 	
 	public boolean full() {// Big O(1)
 		return false;
+	}
+	public boolean last() {// Big O(1)
+		return current.next == null;
+	}
+	public boolean first() {// Big O(1)
+		return current.previous==null;
 	}
 	
 	public void findFirst() {// Big O(1)
@@ -37,33 +45,40 @@ public class LinkedListADT <T> {
 		current.data=val;
 	}
 	
+	
+	
 	public void insert(Contact val) { // Big O(1)
-		Node<T> temp;
-		if(isEmpty())
-			current=head= new Node<T> (val);
-		else
-		{
-			temp=current.next;
-			current.next=new Node<T> (val);
-			current=current.next;
-			current.next=temp;
-			}	
-	}
+		Node<T> tmp = new Node<T>(val);
+		if(isEmpty()) {
+			current=head=tmp;
+		}
+		else {
+			tmp.next=current.next;
+			tmp.previous=current;
+			if(current.next !=null)
+			current.next.previous = tmp;
+			current.next=tmp;
+			current = tmp;
+			
+		}
+		}
 	
 	public void add(String name,String phoneNumber,String emailAddres,String address,String birthday,String notes) { // big O(1)
 		Contact c = new Contact(name,phoneNumber,emailAddres,address,birthday,notes);
-		Node<T> temp;
+		Node<T> temp= new Node<T>(c);
 		if(isEmpty())
 			current = head = new Node<T>(c);
 		else
 		{
-			temp=current.next;
-			current.next=new Node<T> (c);
-			current=current.next;
-			current.next=temp;
+		temp.next=current.next;
+		temp.previous=current;
+		if(current.next !=null)
+		current.next.previous = temp;
+		current.next=temp;
+		current = temp;
 		}
 			
-	}
+	} //modefied
 	public Contact searchName(String name) {// Big O(n)
 		if(head==null)
 			return null;// there is no Contacts
@@ -152,5 +167,24 @@ public class LinkedListADT <T> {
 			System.out.println("There is no contact with the same birth date ");
 	} 
 	
-public void delete() {}
+   public void delete() {
+	   if (current == head) {
+			 head=head.next;
+			 if(head !=null)
+				 head.previous = null;
+		}
+		 else {
+			
+			 current. previous.next=current.next;
+			 if(current.next !=null)
+				 current.next. previous = current.previous;
+		 }
+		 if (current.next == null)
+			 current = head;
+		 else 
+			 current = current.next;
+		 }
+	
+	
 }
+
