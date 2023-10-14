@@ -1,12 +1,27 @@
 
-public class Contact implements Comparable<Contact> {
-	private String name;
-	private String phoneNumber;
-	private String emailAddress;
-	private String address;
-	private String birthday;
-	private String notes;
+
+public class Contact<T> implements Comparable<Contact> {
 	
+	public String name;
+	public String phoneNumber;
+	public String emailAddress;
+	public String address;
+	public String birthday;
+	public String notes;
+	public LinkedListADT<Event> events; 
+	
+	
+
+	public Contact() {
+		this.name ="";
+		this.phoneNumber = "";
+		this.emailAddress = "";
+		this.address = "";
+		this.birthday = "";
+		this.notes = "";
+		events = new LinkedListADT<Event>();	
+		}
+
 	public Contact(String name,String phoneNumber,String emailAddres,String address,String birthday,String notes) {
 		this.name = name;
 		this.phoneNumber=phoneNumber;
@@ -14,8 +29,9 @@ public class Contact implements Comparable<Contact> {
 		this.address = address;
 		this.birthday = birthday;
 		this.notes = notes;
+		events = new LinkedListADT<Event>();
 	}
-	@Override
+	
 	public int compareTo(Contact otherPerson)throws NullPointerException {//bigO(n) this method compare two strings
 		 if(this.name==null || otherPerson.name==null)
 			throw new NullPointerException("Please enter a valid name");
@@ -31,7 +47,11 @@ public class Contact implements Comparable<Contact> {
 	}
 	
 	
-
+	public void addEvent(String eventTitle, String date, String time, String location) {
+		Event e = new Event(eventTitle,date,time,location);
+		events.insert(e);
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -80,5 +100,8 @@ public class Contact implements Comparable<Contact> {
 		this.notes = notes;
 	}
 	
-
 }
+
+
+
+
