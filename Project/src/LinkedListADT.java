@@ -5,9 +5,7 @@ public class LinkedListADT <T> {
 	private Node<T> current;
 	
 	public LinkedListADT() {// Big O(1)
-		head = current= null;
-		
-		
+		head = current= null;	
 	}
 	
 	public boolean isEmpty() {// Big O(1)
@@ -36,33 +34,36 @@ public class LinkedListADT <T> {
 		current=current.next;
 	}
 	
-	public Contact retrive() {// Big O(1)
+	public T retrive() {// Big O(1)
 		return current.data;
 	}
 	
-	public void ubdate(Contact val) {// Big O(1)
+	public void ubdate(T val) {// Big O(1)
 		current.data=val;
 	}
 	
 	
 	
-	public void insert(Contact val) { // Big O(1)
+	public void insert(T val) { // Big O(1)
 		Node<T> tmp = new Node<T>(val);
 		if(isEmpty()) {
 			current=head=tmp;
-		}
+			}
 		else {
 			tmp.next=current.next;
 			tmp.previous=current;
 			if(current.next !=null)
-			current.next.previous = tmp;
+				current.next.previous = tmp;
 			current.next=tmp;
 			current = tmp;
 			
-		}
+			}
 		}
 	
-	public void add(String name,String phoneNumber,String emailAddres,String address,String birthday,String notes) { // big O(1)
+	public void add(String name,String phoneNumber,String emailAddres,String address,String birthday,String notes)throws IllegalArgumentException  { // big O(1)
+		if(searchName(name)!=null || searchPhoneNB(phoneNumber) != null)
+			throw new IllegalArgumentException("The contact is already added");
+		else {
 		Contact c = new Contact(name,phoneNumber,emailAddres,address,birthday,notes);
 		Node<T> temp= new Node<T>(c);
 		if(isEmpty())
@@ -76,8 +77,9 @@ public class LinkedListADT <T> {
 		current.next=temp;
 		current = temp;
 		}
-			
-	} //modefied
+		}
+	} 
+	
 	public Contact searchName(String name) {// Big O(n)
 		if(head==null)
 			return null;// there is no Contacts
@@ -183,7 +185,4 @@ public class LinkedListADT <T> {
 		 else 
 			 current = current.next;
 		 }
-	
-	
 }
-
