@@ -46,10 +46,28 @@ public class Contact<T> implements Comparable<Contact> {
 		 }
 	}
 	
+		public boolean addEvent(Event e) { // the events info deals at phonebook
+		if(!events.isEmpty() && events.search(e) ) // there is events in the list
+			return false; // can not add because its already added
+		events.insert(e); // adding the event
+		return true;
+	}
 	
-	public void addEvent(String eventTitle, String date, String time, String location) {
-		Event e = new Event(eventTitle,date,time,location);
-		events.insert(e);
+	public boolean removeEvent(String eventName) {
+		Event e = new Event();
+		e.setEventTitle(eventName);
+		if(events.isEmpty() || !events.search(e))
+			return false; // there is no events to remove or could not find the event
+		events.delete(e); // the event is deleted
+		return true;
+	}
+	
+	public boolean searchEvent(String eventTitle) {
+		Event e = new Event();
+		e.setEventTitle(eventTitle);
+		if(events.isEmpty() || !events.search(e))// there is no events or could not find the event
+			return false;
+		return true;
 	}
 	
 	public String getName() {
