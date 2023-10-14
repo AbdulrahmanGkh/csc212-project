@@ -1,13 +1,11 @@
 
-public class LinkedListADT <T> {
+public class LinkedListADT <T extends Comparable<T>> {
 	
 	private Node<T> head;
 	private Node<T> current;
 	
 	public LinkedListADT() {// Big O(1)
-		head = current= null;
-		
-		
+		head = current= null;	
 	}
 	
 	public boolean isEmpty() {// Big O(1)
@@ -24,9 +22,6 @@ public class LinkedListADT <T> {
 	public boolean last() {// Big O(1)
 		return current.next == null;
 	}
-	public boolean first() {// Big O(1)
-		return current.previous==null;
-	}
 	
 	public void findFirst() {// Big O(1)
 		current=head;
@@ -36,37 +31,65 @@ public class LinkedListADT <T> {
 		current=current.next;
 	}
 	
-	public Contact retrive() {// Big O(1)
+	public T retrive() {// Big O(1)
 		return current.data;
 	}
 	
-	public void ubdate(Contact val) {// Big O(1)
+	public void ubdate(T val) {// Big O(1)
 		current.data=val;
 	}
 	
-	
-	
-	public void insert(Contact val) { // Big O(1)
-		Node<T> tmp = new Node<T>(val);
+	public void insert(T val) { // Big O(1)
+		Node<T> tmp;
 		if(isEmpty()) {
-			current=head=tmp;
-		}
+			current=head=new Node<T>(val);
+			}
 		else {
-			tmp.next=current.next;
-			tmp.previous=current;
-			if(current.next !=null)
-			current.next.previous = tmp;
-			current.next=tmp;
-			current = tmp;
-			
-		}
+			tmp = current.next;
+			 current.next = new Node<T> (val);
+			 current = current.next;
+			 current.next = tmp;
+			}
 		}
 	
-	public void add(String name,String phoneNumber,String emailAddres,String address,String birthday,String notes) { // big O(1)
+	public boolean search(T val) {
+		if(head==null)
+			return false;
+		Node<T> temp= head;
+		while(temp!=null) {
+			if(temp.getData().compareTo(val)==0) {
+				current = temp;
+				return true;
+			}	
+			temp=temp.getNext();
+		}
+		return false;
+	}
+	
+   public void delete(T val) {
+	   if (current == head)
+		   head = head.next;
+	   else {
+		   Node<T> tmp = head;
+		   while (tmp.next != current)
+			   tmp = tmp.next;
+		   tmp.next = current.next;
+		   }
+		   if (current.next == null)
+			   current = head;
+		   else
+			   current = current.next;
+	 }	   
+   }
+   /*
+	public void add(String name,String phoneNumber,String emailAddres,String address,String birthday,String notes)throws IllegalArgumentException  { // big O(1)
+		if(searchName(name)!=null || searchPhoneNB(phoneNumber) != null)
+			throw new IllegalArgumentException("The contact is already added");
+		else {
 		Contact c = new Contact(name,phoneNumber,emailAddres,address,birthday,notes);
-		Node<T> temp= new Node<T>(c);
+		Node<T> temp= new Node<>(c);
 		if(isEmpty())
-			current = head = new Node<T>(c);
+			current = head = new Node<>(c);
 		else
 		{
 		temp.next=current.next;
@@ -76,18 +99,22 @@ public class LinkedListADT <T> {
 		current.next=temp;
 		current = temp;
 		}
-			
-	} //modefied
+		}
+	} */
+   
+   
+   
+   /*
 	public Contact searchName(String name) {// Big O(n)
 		if(head==null)
-			return null;// there is no Contacts
+			return true;// there is no Contacts
 		Node<T> temp = head;
 		while(temp!=null) {
-			if(temp.getData().getName().equals(name))
-				return temp.getData();// return the contact with the same name
+			if(temp.getData().getName().equalsIgnoreCase(name))
+				return true;// return the contact with the same name
 			temp=temp.getNext();
 			}
-		return null;
+		return false;
 		
 	}
 	public void searchEmail(String emailAddress) {// Big O(n)
@@ -165,25 +192,6 @@ public class LinkedListADT <T> {
 		if(!exist)
 			System.out.println("There is no contact with the same birth date ");
 	} 
+	*/
 	
-   public void delete() {
-	   if (current == head) {
-			 head=head.next;
-			 if(head !=null)
-				 head.previous = null;
-		}
-		 else {
-			
-			 current. previous.next=current.next;
-			 if(current.next !=null)
-				 current.next. previous = current.previous;
-		 }
-		 if (current.next == null)
-			 current = head;
-		 else 
-			 current = current.next;
-		 }
-	
-	
-}
 
