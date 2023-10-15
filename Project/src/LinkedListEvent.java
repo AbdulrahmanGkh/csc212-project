@@ -48,7 +48,7 @@ public class LinkedList<T> { // EVENT
 				return true; // there is a conflict so we can not schedule an event
 			current=current.next;
 		}
-		return false;
+		return false; // there is no conflict we can add the event
 	}
 
 	public void scheduleEvent(String eventTitle, String DateAndTime, String location, Contact contact) {
