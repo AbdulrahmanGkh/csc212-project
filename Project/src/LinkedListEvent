@@ -1,0 +1,16 @@
+
+public class LinkedList<T> { // EVENT
+	private Node<T> head;
+	private Node<T> current;
+	public Event Data;
+	
+	public void scheduleEvent(String eventTitle, String date, String time, String location, Contact contact) {}  // feras
+	public boolean removeEvent(String eventTitle) {}
+	public void printAlphabitavlly() {} // feras 
+	public void searchEventByEventTitle(String eventTitle) {} // search email  abdul
+	public void searchByContactName(String name) {} // abdul
+	public void firstName() { } // feras in Class LINKEDLISTADT
+	}
+	
+	
+	
