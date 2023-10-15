@@ -88,20 +88,32 @@ public class LinkedListADT <T extends Comparable<T>> {
 		return false;
 	}
 	
-   public void delete(Contact val) {
-	   if (current == head)
-		   head = head.next;
-	   else {
-		   Node<T> tmp = head;
-		   while (tmp.next != current)
-			   tmp = tmp.next;
-		   tmp.next = current.next;
-		   }
-		   if (current.next == null)
-			   current = head;
-		   else
-			   current = current.next;
-	 }
+ public void removeContact(String name) {
+		LinkedList e = new LinkedList();// for removing the events connected with this contact
+		if(isEmpty()) { // empty linked list
+			System.out.println("There is no contacts to remove");
+			return;
+		}
+		current =head;
+		if(head.data.getName().equalsIgnoreCase(name)) { // removing the head
+			head=head.next;
+			System.out.println("The name "+ name +" is removed");
+			e.removeEvent(name);// removing the events with the contact
+			return;
+		}
+		Node<T> temp=head;
+		Node<T> current = head.next;
+		while(current!=null) { // remove a contact that is not the first element
+			if(current.data.getName().equalsIgnoreCase(name)) {
+				temp=current.next;
+				System.out.println("The name " + name +" is removed");
+				e.removeEvent(name);// removing the events with the contact
+				return;
+			}
+			temp =current;
+			current=current.next;
+		}
+	}
 
 public void addContact(String name,String phoneNumber,String emailAddres,String address,String birthday,String notes) { // big O(n)
 		Contact c = new Contact(name,phoneNumber,emailAddres,address,birthday,notes);
