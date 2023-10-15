@@ -37,10 +37,43 @@ public class LinkedList<T> { // EVENT
 	public void ubdate(Event val) {// Big O(1)
 		current.Data=val;
 	}
-
 	
-	public void scheduleEvent(String eventTitle, String date, String time, String location, Contact contact) {}  // feras
+	public void firstName() { } // feras in Class LINKEDLISTADT
 	public void printAlphabitavlly() {} // feras 
+
+	public boolean Conflict(Contact contact, String DateAndTime) {
+		current=head;
+		while(current!=null) {
+			if(current.Data.getDateAndTime().equalsIgnoreCase(DateAndTime) && current.Data.getContact().equals(contact))
+				return true; // there is a conflict so we can not schedule an event
+			current=current.next;
+		}
+		return false;
+	}
+
+	public void scheduleEvent(String eventTitle, String DateAndTime, String location, Contact contact) {
+		Event e = new Event(eventTitle,DateAndTime,location,contact);
+		Node<T> temp;
+		if(isEmpty())
+			current=head=new Node<T>(e);
+		else {
+			current=head;
+			if(e.compareTo(head.Data) < 0) {// The eventTitle is first alphabetically
+				 temp = head;
+				head = new Node<T>(e);
+				head.next = temp;
+			}
+			else {
+				while(current.next!=null && e.compareTo(current.next.Data) > 0) {
+					current=current.next; ; // the eventTitle goes to its alphabetical place
+					 temp = current.next;
+					current.next = new Node<T>(e);
+					current = current.next;
+					current.next = temp;
+				}	
+			}
+		}
+	}
 
 	public void removeEvent(String name) {
 		if(isEmpty())
@@ -103,9 +136,6 @@ public class LinkedList<T> { // EVENT
 		}
 		if (!exist)
 			System.out.println("There is no events for "+name);
-		
-		
 	} // abdul
-	public void firstName() { } // feras in Class LINKEDLISTADT
-	}
+}
 	
