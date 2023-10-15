@@ -50,8 +50,8 @@ public class LinkedListADT <T extends Comparable<T>> {
 				head.next=temp;
 			}
 			else {
-				while(current.next!=null && val.compareTo(head.getData()) >0) { // The name goes to its place alphabetically
-					current=current.getNext();
+				while(current.next!=null && val.compareTo(head.data) >0) { // The name goes to its place alphabetically
+					current=current.next;
 					Node<T> temp = current.next;
 					current.next = new Node<T>(val);
 					current = current.next;
