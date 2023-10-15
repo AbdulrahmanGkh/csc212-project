@@ -14,11 +14,12 @@ public class Event implements Comparable<Event> {
 		this.location=null;
 	}
 	
-	public Event(String eventTitle, String date, String time, String location) {
+	public Event(String eventTitle, String date, String time, String location, Contact Contact) {
 		this.eventTitle = eventTitle;
 		this.date = date;
 		this.time = time;
 		this.location = location;
+		this.Contact=Contact;
 	}
 	
 	public int compareTo(Event event)throws NullPointerException  {
