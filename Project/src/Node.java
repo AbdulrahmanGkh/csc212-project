@@ -9,6 +9,11 @@ public class Node <T>{
 		data=null;
 		next=null;
 	}
+
+	public Node(Event val) {
+		Data=val;
+		next=null;
+	}
 	
 	public Node(Contact val) {
 		data=val;
