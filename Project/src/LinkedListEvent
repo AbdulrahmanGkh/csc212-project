@@ -1,4 +1,3 @@
-
 public class LinkedList<T> { // EVENT
 	private Node<T> head;
 	private Node<T> current;
@@ -7,10 +6,50 @@ public class LinkedList<T> { // EVENT
 	public void scheduleEvent(String eventTitle, String date, String time, String location, Contact contact) {}  // feras
 	public boolean removeEvent(String eventTitle) {}
 	public void printAlphabitavlly() {} // feras 
-	public void searchEventByEventTitle(String eventTitle) {} // search email  abdul
-	public void searchByContactName(String name) {} // abdul
+	public void searchEventByEventTitle(String eventTitle) {
+		
+		if (head == null)
+			System.out.println("there is no contact");
+		Node<T> temp = head;
+		boolean exist = false;
+		while(temp.getNext() != null) {
+			if(temp.getdata().getEventTitle().equalsIgnoreCase(eventTitle)) {
+			System.out.println("Event found!");
+			System.out.println("Event Title "+ temp.getdata().eventTitle);
+			System.out.println("Contact name "+ temp.getData().getName());
+			System.out.println("Event date and time "+temp.getdata().date + temp.getdata().time);
+			System.out.println("Event location "+ temp.getdata().location);
+			exist = true;
+			}
+			temp = temp.getNext();
+		}
+		
+		if (!exist)
+			System.out.println("There is no events");
+		
+	} // search email  abdul
+	public void searchByContactName(String name) {
+		if (head == null)
+		System.out.println("There is no contact");
+		Node<T> temp = head;
+		boolean exist = false;
+		while(temp.getNext() != null) {
+			if(temp.getData().getName().equalsIgnoreCase(name)) { 
+				System.out.println("Event found!");
+				System.out.println("Event Title "+ temp.getdata().eventTitle);
+				System.out.println("Contact name "+ temp.getData().getName());
+				System.out.println("Event date and time "+temp.getdata().date + temp.getdata().time);
+				System.out.println("Event location "+ temp.getdata().location);
+				exist = true;
+			}
+			temp = temp.getNext();
+			
+		}
+		if (!exist)
+			System.out.println("There is no events for "+name);
+		
+		
+	} // abdul
 	public void firstName() { } // feras in Class LINKEDLISTADT
 	}
-	
-	
 	
