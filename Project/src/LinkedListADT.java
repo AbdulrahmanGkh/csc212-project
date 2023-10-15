@@ -38,6 +38,28 @@ public class LinkedListADT <T extends Comparable<T>> {
 	public void ubdate(T val) {// Big O(1)
 		current.data=val;
 	}
+
+	public void insertSort(T val) {
+		if(isEmpty())
+			head=current=new Node<T>(val);
+		else {
+			current=head;
+			if(val.compareTo(head.data)<0) { // The name is first alphabetically
+				Node<T> temp =head;
+				head=new Node<T>(val);
+				head.next=temp;
+			}
+			else {
+				while(current.next!=null && val.compareTo(head.getData()) >0) { // The name goes to its place alphabetically
+					current=current.getNext();
+					Node<T> temp = current.next;
+					current.next = new Node<T>(val);
+					current = current.next;
+					current.next = temp;
+				}
+			}
+		}
+	}
 	
 	public void insert(T val) { // Big O(1)
 		Node<T> tmp;
