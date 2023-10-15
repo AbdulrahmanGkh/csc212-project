@@ -2,7 +2,10 @@ import java.util.Scanner;
 
 public class PhoneBook {//
 	
-	public static void ShowMenue() {
+	
+	
+	
+	public static void ProgramMenue() {
 	System.out.println("Welcome to the Linked Tree Phoonebook!");
 	System.out.println("Please choose an option");
 	System.out.println("1.Add a contact");
@@ -16,6 +19,23 @@ public class PhoneBook {//
 	System.out.println("Enter your choice: ");
 		
 	}
+	public static void SearchContactMenu() {
+		System.out.println("Enter Search criteria: ");
+		System.out.println("Name");
+		System.out.println("Phone Number");
+		System.out.println("Email Address");
+		System.out.println("Address");
+		System.out.println("Birthday");
+	}
+	
+	public static void PrintEvent() {
+		System.out.println("Enter search criteria");
+		System.out.println("1. contact name");
+		System.out.println("2. Event tittle");
+		System.out.println("Enter your choice");
+	}
+	
+	
 
 	public static void main(String[] args) {
 	 Scanner input = new Scanner(System.in);
@@ -23,7 +43,7 @@ public class PhoneBook {//
 	 
 		
 		do {
-			ShowMenue();
+			 ProgramMenue(); //this calls the menue we created above
 			choice = input.nextInt();
 			choice = input.nextInt();
 			switch (choice){
