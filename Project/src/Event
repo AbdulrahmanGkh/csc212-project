@@ -6,6 +6,13 @@ public class Event implements Comparable<Event> {
 	public String time;
 	public String location;
 	public Contact contact;
+
+	public Event() {
+		this.eventTitle=null;
+		this.date=null;
+		this.time=null;
+		this.location=null;
+	}
 	
 	public Event(String eventTitle, String date, String time, String location) {
 		this.eventTitle = eventTitle;
