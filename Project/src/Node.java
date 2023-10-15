@@ -2,14 +2,15 @@
 public class Node <T>{
 	
 	public Node<T> next;
-	public T data;
+	public Contact data;
+	public Event Data;
 	
 	public Node() {
 		data=null;
 		next=null;
 	}
 	
-	public Node(T val) {
+	public Node(Contact val) {
 		data=val;
 		next=null;
 	}
@@ -22,12 +23,16 @@ public class Node <T>{
 		this.next = next;
 	}
 
-	public T getData() {
+	public Contact getData() {
 		return data;
 	}
 
-	public void setData(T data) {
+	public void setData(Contact data) {
 		this.data = data;
+	}
+
+	public void setData(Event data) {
+		Data = data;
 	}
 
 }
