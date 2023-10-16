@@ -137,5 +137,15 @@ public class LinkedList<T> { // EVENT
 		if (!exist)
 			System.out.println("There is no events for "+name);
 	} // abdul
+	public void printAlphabiticly() {
+		if(isEmpty())
+			return;
+		
+		current = head;
+		while(current!=null) {
+			System.out.println(current.getData().geteventTitle);
+			current = current.getNext();
+		}
+	}
 }
 	
