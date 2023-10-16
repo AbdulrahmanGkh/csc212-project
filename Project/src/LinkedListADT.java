@@ -226,6 +226,26 @@ public void addContact(String name,String phoneNumber,String emailAddres,String 
 			if(!exist)
 				System.out.println("There is no contact with the same birth date ");
 		
-	
+	public void Firstname(String name) {
+		 int i=0;
+		   ;
+		 if(isEmpty())
+			 System.out.println("There is no contact with this name");
+		 current = head;
+		 while(current != null) {
+			 String fname = current.getData().getName();
+			String sname[]= fname.split(" ");
+			if(sname[i].compareTo(name)==0)
+				System.out.println(current.get);
+				 
+			 
+			 
+			System.out.println("");
+			current = current.getNext();
+			
+			
+		 }
+			 
+	 } 
    }
   
