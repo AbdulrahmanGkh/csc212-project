@@ -60,20 +60,7 @@ public class LinkedListADT <T extends Comparable<T>> {
 			}
 		}
 	}
-	
-	public void insert(Contact val) { // Big O(1)
-		Node<T> tmp;
-		if(isEmpty()) {
-			current=head=new Node<T>(val);
-			}
-		else {
-			tmp = current.next;
-			 current.next = new Node<T> (val);
-			 current = current.next;
-			 current.next = tmp;
-			}
-		}
-	
+
 	public boolean search(Contact val) {
 		if(head==null)
 			return false;
@@ -87,6 +74,26 @@ public class LinkedListADT <T extends Comparable<T>> {
 		}
 		return false;
 	}
+
+	public void Firstname(String name) {
+		 if(isEmpty())
+			 System.out.println("There is no contact with this name");
+		 current = head;
+		 boolean exist=true;
+		 while(current != null) {
+			 String names = current.getData().getName();
+			 String first[]= names.split(" ");
+			if(first[0].equalsIgnoreCase(name)) {
+				System.out.println("Contacts found!");
+				System.out.println("Name: "+ current.data.getName());
+				System.out.println("Phone Number: "+ current.data.getPhoneNumber());
+				System.out.println("Email Address: "+ current.data.getEmailAddress());
+				System.out.println("Address: "+ current.data.getAddress());
+				System.out.println("Birthday: "+ current.data.getBirthday());
+			}
+			current = current.getNext();
+		 }		 
+	 } 
 	
  public void removeContact(String name) {
 		LinkedList e = new LinkedList();// for removing the events connected with this contact
@@ -208,26 +215,6 @@ public void addContact(String name,String phoneNumber,String emailAddres,String 
 			if(!exist)
 				System.out.println("There is no contact with the same birth date ");
 		
-	public void Firstname(String name) {
-		 int i=0;
-		   ;
-		 if(isEmpty())
-			 System.out.println("There is no contact with this name");
-		 current = head;
-		 while(current != null) {
-			 String fname = current.getData().getName();
-			String sname[]= fname.split(" ");
-			if(sname[i].compareTo(name)==0)
-				System.out.println(current.get);
-				 
-			 
-			 
-			System.out.println("");
-			current = current.getNext();
-			
-			
-		 }
-			 
-	 } 
+	 }
    }
   
