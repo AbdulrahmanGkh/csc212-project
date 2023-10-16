@@ -8,9 +8,6 @@ public class Contact<T> implements Comparable<Contact> {
 	public String address;
 	public String birthday;
 	public String notes;
-	public LinkedListADT<Event> events; 
-	
-	
 
 	public Contact() {
 		this.name ="";
@@ -18,8 +15,7 @@ public class Contact<T> implements Comparable<Contact> {
 		this.emailAddress = "";
 		this.address = "";
 		this.birthday = "";
-		this.notes = "";
-		events = new LinkedListADT<Event>();	
+		this.notes = "";	
 		}
 
 	public Contact(String name,String phoneNumber,String emailAddres,String address,String birthday,String notes) {
@@ -29,7 +25,6 @@ public class Contact<T> implements Comparable<Contact> {
 		this.address = address;
 		this.birthday = birthday;
 		this.notes = notes;
-		events = new LinkedListADT<Event>();
 	}
 	
 	public int compareTo(Contact otherPerson)throws NullPointerException {//bigO(n) this method compare two strings
@@ -45,31 +40,6 @@ public class Contact<T> implements Comparable<Contact> {
 			 return 1;// this means otherPerson>this.name
 		 }
 	}
-	
-		public boolean addEvent(Event e) { // the events info deals at phonebook
-		if(!events.isEmpty() && events.search(e) ) // there is events in the list
-			return false; // can not add because its already added
-		events.insert(e); // adding the event
-		return true;
-	}
-	
-	public boolean removeEvent(String eventName) {
-		Event e = new Event();
-		e.setEventTitle(eventName);
-		if(events.isEmpty() || !events.search(e))
-			return false; // there is no events to remove or could not find the event
-		events.delete(e); // the event is deleted
-		return true;
-	}
-	
-	public boolean searchEvent(String eventTitle) {
-		Event e = new Event();
-		e.setEventTitle(eventTitle);
-		if(events.isEmpty() || !events.search(e))// there is no events or could not find the event
-			return false;
-		return true;
-	}
-	
 	public String getName() {
 		return name;
 	}
