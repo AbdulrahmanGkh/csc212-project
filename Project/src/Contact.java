@@ -1,6 +1,6 @@
 
 
-public class Contact<T> implements Comparable<Contact> {
+public class Contact implements Comparable<Contact> {
 	
 	public String name;
 	public String phoneNumber;
@@ -8,6 +8,8 @@ public class Contact<T> implements Comparable<Contact> {
 	public String address;
 	public String birthday;
 	public String notes;
+	
+	
 
 	public Contact() {
 		this.name ="";
@@ -18,15 +20,15 @@ public class Contact<T> implements Comparable<Contact> {
 		this.notes = "";	
 		}
 
-	public Contact(String name,String phoneNumber,String emailAddres,String address,String birthday,String notes) {
+	public Contact(String name,String phoneNumber,String emailAddress,String address,String birthday,String notes) {
 		this.name = name;
 		this.phoneNumber=phoneNumber;
-		this.emailAddress=emailAddress;
 		this.address = address;
 		this.birthday = birthday;
 		this.notes = notes;
+		this.emailAddress=emailAddress;
 	}
-	
+	@Override
 	public int compareTo(Contact otherPerson)throws NullPointerException {//bigO(n) this method compare two strings
 		 if(this.name==null || otherPerson.name==null)
 			throw new NullPointerException("Please enter a valid name");
@@ -40,7 +42,8 @@ public class Contact<T> implements Comparable<Contact> {
 			 return 1;// this means otherPerson>this.name
 		 }
 	}
-	public String getName() {
+	
+	public String getName(){
 		return name;
 	}
 
@@ -87,7 +90,6 @@ public class Contact<T> implements Comparable<Contact> {
 	public void setNotes(String notes) {
 		this.notes = notes;
 	}
-	
 }
 
 
