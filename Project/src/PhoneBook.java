@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class PhoneBook {//
+public class PhoneBook {
 	
 	
 	
@@ -15,7 +15,8 @@ public class PhoneBook {//
 	System.out.println("5.Print event details");
 	System.out.println("6. Print contact by first name");
 	System.out.println("7.Print all events alphabetically");
-	System.out.println("8. Exit");
+	System.out.println("8.Print Contact that share an event");
+	System.out.println("9. Exit");
 	System.out.println("Enter your choice: ");
 	}
 	public static void SearchContactMenu() {
@@ -58,6 +59,7 @@ public class PhoneBook {//
 			switch (choice){
 			
 			case 1:
+				
 				System.out.println("Enter the contact's name:");
 				String name=n.nextLine();
 				System.out.println("Enter the contact's phone number:");
@@ -79,6 +81,7 @@ public class PhoneBook {//
 				break;
 				
 			case 2:
+				
 				SearchContactMenu();
 				int choice2;
 				choice2=input.nextInt();
@@ -86,25 +89,27 @@ public class PhoneBook {//
 				case 1:
 					System.out.println("Enter the contact's name:");
 					name=n.next();
-					if(C.searchName(name)!=null) {
-						System.out.println("Name:" +C.searchName(name).getName());
-						System.out.println("Phone Number:" +C.searchName(name).getPhoneNumber());
-						System.out.println("Email Address:" +C.searchName(name).getEmailAddress());
-						System.out.println("Address:" +C.searchName(name).getAddress());
-						System.out.println("Birthday:" +C.searchName(name).getBirthday());
-						System.out.println("Notes:" + C.searchName(name).getNotes());
+					Contact contact1 = C.searchName(name);
+					if(contact1!=null) {
+						System.out.println("Name:" +contact1.getName());
+						System.out.println("Phone Number:" +contact1.getPhoneNumber());
+						System.out.println("Email Address:" +contact1.getEmailAddress());
+						System.out.println("Address:" +contact1.getAddress());
+						System.out.println("Birthday:" +contact1.getBirthday());
+						System.out.println("Notes:" + contact1.getNotes());
 						break;
 					}
 				case 2:
 					System.out.println("Enter Phone number:");
 					phoneNumber=p.next();
-					if(C.searchPhoneNB(phoneNumber)!=null) {
-						System.out.println("Name:" +C.searchPhoneNB(phoneNumber).getName());
-						System.out.println("Phone Number:" +C.searchPhoneNB(phoneNumber).getPhoneNumber());
-						System.out.println("Email Address:" +C.searchPhoneNB(phoneNumber).getEmailAddress());
-						System.out.println("Address:" +C.searchPhoneNB(phoneNumber).getAddress());
-						System.out.println("Birthday:" +C.searchPhoneNB(phoneNumber).getBirthday());
-						System.out.println("Notes:" + C.searchPhoneNB(phoneNumber).getNotes());
+					Contact contact2 = C.searchPhoneNB(phoneNumber);
+					if(contact2!=null) {
+						System.out.println("Name:" +contact2.getName());
+						System.out.println("Phone Number:" +contact2.getPhoneNumber());
+						System.out.println("Email Address:" +contact2.getEmailAddress());
+						System.out.println("Address:" +contact2.getAddress());
+						System.out.println("Birthday:" +contact2.getBirthday());
+						System.out.println("Notes:" + contact2.getNotes());
 						break;
 					}
 				case 3:
@@ -126,18 +131,20 @@ public class PhoneBook {//
 				break;
 				
 			case 3: 
+				
 			System.out.println("Enter contact name that you want to delete");
 			name=n.nextLine();
 			C.removeContact(name);
 				break;
 		
 			case 4:
+				
 			System.out.println("Enter event title:");
 			String eventTitle=ev.nextLine();
 			System.out.println("Enter contact name:");
 			String cName=cv.nextLine();
-			Contact contact = C.searchName(cName);
-			if(contact==null) {
+			Contact contact3 = C.searchName(cName);
+			if( contact3==null) {
 				System.out.println("There is no contact in the list do an event with them");
 				break;
 			}
@@ -145,47 +152,68 @@ public class PhoneBook {//
 			String DateAndtime =dt.nextLine();
 			System.out.println("Enter event location:");
 			String location=l.nextLine();
-			if(E.Conflict(contact, DateAndtime)) {
+			if(E.Conflict(C.searchName(cName), DateAndtime)) {
 				System.out.println("there is an event at the same time can not add an event");
 				break;
 			}
-			E.scheduleEvent(eventTitle, DateAndtime, location, contact);
+			E.scheduleEvent(eventTitle, DateAndtime, location, contact3);
 				break;
 				
 			case 5:
+				
 				PrintEvent();
-				
-			
-				
+				int choice3=input.nextInt();
+				if(choice3==1) {
+					System.out.println("Enter contact name:");
+					String Cname=cv.nextLine();
+					Contact contact4 = C.searchName(Cname);
+					if(contact4==null) 
+						System.out.println("There is no contact in the list who has this event");
+					else {
+						System.out.println("The contact is found!");
+						E.searchByContactName(Cname);
+						break;
+					}
+				}
+					else if(choice3==2) {
+						System.out.println("Enter the event title");
+						 eventTitle=ev.nextLine();
+						 E.searchEventByEventTitle(eventTitle);
+						break;
+					}
+					else
+						System.out.println("Wrong input");
 				break;
 				
-				
-				
 			case 6:
+				
 				System.out.println("Enter the first name:");
 				name=n.nextLine();
 				C.Firstname(name);
 				
 				break;
 				
-				
-				
 			case 7:
-				//Print all events alphabetically
 				
+				E.printAlphabiticly();
 				break;
-				
-				
 				
 			case 8:
 				
+				System.out.println("Enter the event title");
+				eventTitle=ev.nextLine();
+				E.printContactShareEvent(eventTitle);
+				break;
+				
+			case 9:
+
 				System.out.println("Exiting the program. Goodbye!");
 				break;
 				default: 
-					System.out.println("Invaled choice,please try to Enter number from 1-8");
+					System.out.println("Invaled choice,please try to Enter number from 1-9");
 			}
 			
-		}while(choice !=8 );
+		}while(choice !=9 );
 
 	}
 
