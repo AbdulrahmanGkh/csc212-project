@@ -61,9 +61,6 @@ public class LinkedList<T> { // EVENT
 		}
 	}
 	
-	public void firstName() { } // feras in Class LINKEDLISTADT
-	public void printAlphabitavlly() {} // feras 
-
 	public boolean Conflict(Contact contact, String DateAndTime) {
 		current=head;
 		while(current!=null) {
@@ -142,12 +139,13 @@ public class LinkedList<T> { // EVENT
 			System.out.println("There is no events for "+name);
 	} // abdul
 	public void printAlphabiticly() {
-		if(isEmpty())
+		if(isEmpty()) {
+			System.out.println("There is no events");
 			return;
-		
+			}
 		current = head;
 		while(current!=null) {
-			System.out.println(current.getData().geteventTitle);
+			System.out.println("Title: " +current.Data.getEventTitle());
 			current = current.getNext();
 		}
 	}
