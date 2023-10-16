@@ -37,6 +37,29 @@ public class LinkedList<T> { // EVENT
 	public void ubdate(Event val) {// Big O(1)
 		current.Data=val;
 	}
+
+	public void insertSort(Event val) {
+		Node<T> temp;
+		if(isEmpty())
+			head=current=new Node<T>(val);
+		else {
+			current=head;
+			if(val.compareTo(head.Data) < 0) { // The Event is first alphabetically
+				 temp =head;
+				head=new Node<T>(val);
+				head.next=temp;
+			}
+			else {
+				while(current.next!=null && val.compareTo(head.Data) > 0) { // The Event goes to its place alphabetically
+					current=current.next;
+					 temp = current.next;
+					current.next = new Node<T>(val);
+					current = current.next;
+					current.next = temp;
+				}
+			}
+		}
+	}
 	
 	public void firstName() { } // feras in Class LINKEDLISTADT
 	public void printAlphabitavlly() {} // feras 
@@ -53,26 +76,7 @@ public class LinkedList<T> { // EVENT
 
 	public void scheduleEvent(String eventTitle, String DateAndTime, String location, Contact contact) {
 		Event e = new Event(eventTitle,DateAndTime,location,contact);
-		Node<T> temp;
-		if(isEmpty())
-			current=head=new Node<T>(e);
-		else {
-			current=head;
-			if(e.compareTo(head.Data) < 0) {// The eventTitle is first alphabetically
-				 temp = head;
-				head = new Node<T>(e);
-				head.next = temp;
-			}
-			else {
-				while(current.next!=null && e.compareTo(current.next.Data) > 0) {
-					current=current.next; ; // the eventTitle goes to its alphabetical place
-					 temp = current.next;
-					current.next = new Node<T>(e);
-					current = current.next;
-					current.next = temp;
-				}	
-			}
-		}
+		insertSort(e);
 	}
 
 	public void removeEvent(String name) {
