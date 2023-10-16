@@ -117,25 +117,7 @@ public class LinkedListADT <T extends Comparable<T>> {
 
 public void addContact(String name,String phoneNumber,String emailAddres,String address,String birthday,String notes) { // big O(n)
 		Contact c = new Contact(name,phoneNumber,emailAddres,address,birthday,notes);
-		if(isEmpty())
-			current = head = new Node<>(c);
-		else {
-			current=head;
-			if(c.compareTo(head.getData())<0) {// The name is first alphabetically
-				Node<T> temp = head;
-				head = new Node<T>(c);
-				head.next = temp;
-			}
-			else {
-				while(current.next!=null && c.compareTo(current.next.data) > 0) {
-					current=current.next; ; // the name goes to its alphabetical place
-					Node<T> temp = current.next;
-					current.next = new Node<T>(c);
-					current = current.next;
-					current.next = temp;
-				}	
-			}
-		}
+		insertSort(c);
 	}
 		
 	
