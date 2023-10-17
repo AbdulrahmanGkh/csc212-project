@@ -5,7 +5,7 @@ public class PhoneBook {
 	
 	
 	
-	public static void ProgramMenu() {
+	public static void ProgramMenu() { 
 	System.out.println("Welcome to the Linked Tree Phoonebook!");
 	System.out.println("Please choose an option");
 	System.out.println("1.Add a contact");
@@ -13,10 +13,10 @@ public class PhoneBook {
 	System.out.println("3.Delete a contact");
 	System.out.println("4.Sechedule an event");
 	System.out.println("5.Print event details");
-	System.out.println("6. Print contact by first name");
+	System.out.println("6.Print contact by first name");
 	System.out.println("7.Print all events alphabetically");
 	System.out.println("8.Print Contact that share an event");
-	System.out.println("9. Exit");
+	System.out.println("9.Exit");
 	System.out.println("Enter your choice: ");
 	}
 	public static void SearchContactMenu() {
@@ -82,12 +82,15 @@ public class PhoneBook {
 				 notes=nt.nextLine();
 				if(C.searchName(name)!=null || C.searchPhoneNB(phoneNumber) !=null) { 
 					System.out.println("Contact is found");
+					System.out.println("\r");
 					break;
 				}
 				else {
-					C.addContact(name, phoneNumber, emailAddress, address, birthday, notes);
+					C.addContact(name, phoneNumber, emailAddress, address, birthday, notes,C);
 					System.out.println(" Contact added successfully! ");
-				break; }
+					System.out.println("\r");
+					break;
+				}
 				
 			case 2:
 				
@@ -106,10 +109,12 @@ public class PhoneBook {
 						System.out.println("Address:" +contact1.getAddress());
 						System.out.println("Birthday:" +contact1.getBirthday());
 						System.out.println("Notes:" + contact1.getNotes());
+						System.out.println("\r");
 						break;
 					}
 					else {
 					System.out.println("There is no contacts with the same name");
+					System.out.println("\r");
 					 break;
 					}
 				case 2:
@@ -123,34 +128,44 @@ public class PhoneBook {
 						System.out.println("Address:" +contact2.getAddress());
 						System.out.println("Birthday:" +contact2.getBirthday());
 						System.out.println("Notes:" + contact2.getNotes());
+						System.out.println("\r");
 						break;
 					}
 					System.out.println("There is no contacts with the same phone number");
+					System.out.println("\r");
 					break;
 				case 3:
 					System.out.println("Enter Email Address");
 					emailAddress=e.nextLine();
 					C.searchEmail(emailAddress,C);
+					System.out.println("\r");
 					break;
 				case 4:
 					System.out.println("Enter Address");
 					address=a.nextLine();
 					C.searchAddress(address,C);
+					System.out.println("\r");
 					break;
 				case 5:
 					System.out.println("Enter birthday");
 					birthday=b.nextLine();
 					C.searchBirthday(birthday,C);
+					System.out.println("\r");
 					break;
 				}
+				System.out.println("\r");
 				break;
 				
 			case 3: 
 				
 			System.out.println("Enter contact name that you want to delete");
 			name=n.nextLine();
-			C.removeContact(name,E);
-				break;
+			if(C.searchName(name)!=null)
+				C.removeContact(name,E,C);
+			else 
+				System.out.println("There is no contact to delete");
+			System.out.println("\r");
+			break;
 		
 			case 4:
 				
@@ -161,6 +176,7 @@ public class PhoneBook {
 			Contact contact3 = C.searchName(name);
 			if( contact3==null) {
 				System.out.println("There is no contact in the list to do an event with them");
+				System.out.println("\r");
 				break;
 			}
 			System.out.println("Enter event date and time (MM/DD/YYYY HH:MM):");
@@ -169,10 +185,12 @@ public class PhoneBook {
 			 location=l.nextLine();
 			if(E.Conflict(contact3, DateAndtime)) {
 				System.out.println("there is an event at the same time can not add an event");
+				System.out.println("\r");
 				break;
 			}
 			E.scheduleEvent(eventTitle, DateAndtime, location, contact3);
 			System.out.println("Event scheduled successfully!");
+			System.out.println("\r");
 				break;
 				
 			case 5:
@@ -185,11 +203,13 @@ public class PhoneBook {
 					Contact contact4 = C.searchName(name);
 					if(contact4==null) {
 						System.out.println("There is no contact in the list who has this event");
+						System.out.println("\r");
 						break;
 					}
 					else {
 						System.out.println("The contact is found!");
 						E.searchByContactName(name,E);
+						System.out.println("\r");
 						break;
 					}
 				}
@@ -197,10 +217,12 @@ public class PhoneBook {
 						System.out.println("Enter the event title");
 						 eventTitle=ev.nextLine();
 						 E.searchEventByEventTitle(eventTitle,E);
+						 System.out.println("\r");
 						break;
 					}
 					else
 						System.out.println("Wrong input");
+				System.out.println("\r");
 				break;
 				
 			case 6:
@@ -214,6 +236,7 @@ public class PhoneBook {
 			case 7:
 				
 				E.printAlphabiticly();
+				System.out.println("\r");
 				break;
 				
 			case 8:
@@ -221,11 +244,13 @@ public class PhoneBook {
 				System.out.println("Enter the event title");
 				eventTitle=ev.nextLine();
 				E.printContactShareEvent(eventTitle);
+				System.out.println("\r");
 				break;
 				
 			case 9:
 
 				System.out.println("Exiting the program. Goodbye!");
+				System.out.println("\r");
 				break;
 				default: 
 					System.out.println("Invaled choice,please try to Enter number from 1-9");
