@@ -1,5 +1,5 @@
 
-public class LinkedList<T> { 
+public class LinkedList<T> { // EVENT
 	private Node<T> head;
 	private Node<T> current;
 	public Event Data;
@@ -51,7 +51,7 @@ public class LinkedList<T> {
 				head.next=temp;
 			}
 			else {
-				while(current.next!=null && val.compareTo(head.Data) > 0) { // The Event goes to its place alphabetically
+				while(current.next!=null && val.compareTo(current.next.Data) > 0) { // The Event goes to its place alphabetically
 					current=current.next;
 					 temp = current.next;
 					current.next = new Node<T>(val);
@@ -130,20 +130,19 @@ public void searchEventByEventTitle(String eventTitle) {
 	}
 	
 	public void searchByContactName(String name) {
-		if (head == null)
-		System.out.println("There is no contact");
-		Node<T> temp = head;
+		current= head; // try retriev
 		boolean exist = false;
-		while(temp.next != null) {
-			if(temp.getData().getName().equalsIgnoreCase(name)) { 
-				System.out.println("Event found!");
-				System.out.println("Event Title "+ temp.Data.getEventTitle());
-				System.out.println("Contact name "+ temp.data.getName());
-				System.out.println("Event date and time "+temp.Data.getDateAndTime());
-				System.out.println("Event location "+ temp.Data.location);
+		while(current.next != null) {
+			if(current.Data.getContact().getName().equalsIgnoreCase(name)) { 
 				exist = true;
+				Event event = current.Data;
+				System.out.println("Event found!");
+				System.out.println("Event Title "+ event.getEventTitle());
+				System.out.println("Contact name "+ event.getContact().getName());
+				System.out.println("Event date and time "+event.getDateAndTime());
+				System.out.println("Event location "+ event.location);
 			}
-			temp = temp.next;
+			current = current.next;
 			
 		}
 		if (!exist)
@@ -169,6 +168,7 @@ public void searchEventByEventTitle(String eventTitle) {
 		if (exist == false)
 			System.out.println("there is no event with this title ");
 		System.out.println();
+
 	}
 	
 }
