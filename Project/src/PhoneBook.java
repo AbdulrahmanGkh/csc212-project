@@ -55,7 +55,11 @@ public class PhoneBook {
 	 String address;
 	 String birthday;
 	 String notes;
-	 String phoneNumbe;
+	 String eventTitle;
+	 String cName;
+	 String DateAndtime;
+	 String location;
+	 String Cname;
 	 int choice;
 	 LinkedListADT<Contact> C = new LinkedListADT<Contact>();
 	 LinkedList <Event> E = new LinkedList<Event>();
@@ -79,7 +83,7 @@ public class PhoneBook {
 				 birthday=b.nextLine();
 				System.out.println("Enter any notes for the contact:");
 				 notes=nt.nextLine();
-				if(C.searchName(name,C)!=null || C.searchPhoneNB(phoneNumber,C) !=null) { 
+				if(C.searchName(name)!=null || C.searchPhoneNB(phoneNumber) !=null) { 
 					System.out.println("Contact is found");
 					break;
 				}
@@ -96,8 +100,8 @@ public class PhoneBook {
 				switch(choice2) {
 				case 1:
 					System.out.println("Enter the contact's name:");
-					name=n.next();
-					Contact contact1 = C.searchName(name,C);
+					name=n.nextLine();
+					Contact contact1 = C.searchName(name);
 					if(contact1!=null) {
 						System.out.println("Name:" +contact1.getName());
 						System.out.println("Phone Number:" +contact1.getPhoneNumber());
@@ -107,12 +111,14 @@ public class PhoneBook {
 						System.out.println("Notes:" + contact1.getNotes());
 						break;
 					}
+					else {
 					System.out.println("There is no contacts with the same name");
 					 break;
+					}
 				case 2:
 					System.out.println("Enter Phone number:");
-					phoneNumber=p.next();
-					Contact contact2 = C.searchPhoneNB(phoneNumber,C);
+					phoneNumber=p.nextLine();
+					Contact contact2 = C.searchPhoneNB(phoneNumber);
 					if(contact2!=null) {
 						System.out.println("Name:" +contact2.getName());
 						System.out.println("Phone Number:" +contact2.getPhoneNumber());
@@ -126,18 +132,18 @@ public class PhoneBook {
 					break;
 				case 3:
 					System.out.println("Enter Email Address");
-					emailAddress=e.next();
-					C.searchEmail(emailAddress,C);
+					emailAddress=e.nextLine();
+					C.searchEmail(emailAddress);
 					break;
 				case 4:
 					System.out.println("Enter Address");
-					address=a.next();
-					C.searchAddress(address,C);
+					address=a.nextLine();
+					C.searchAddress(address);
 					break;
 				case 5:
 					System.out.println("Enter birthday");
-					birthday=b.next();
-					C.searchBirthday(birthday,C);
+					birthday=b.nextLine();
+					C.searchBirthday(birthday);
 					break;
 				}
 				break;
@@ -152,18 +158,18 @@ public class PhoneBook {
 			case 4:
 				
 			System.out.println("Enter event title:");
-			String eventTitle=ev.nextLine();
+			 eventTitle=ev.nextLine();
 			System.out.println("Enter contact name:");
-			String cName=cv.nextLine();
-			Contact contact3 = C.searchName(cName,C);
+			 cName=cv.nextLine();
+			Contact contact3 = C.searchName(cName);
 			if( contact3==null) {
 				System.out.println("There is no contact in the list do an event with them");
 				break;
 			}
 			System.out.println("Enter event date and time (MM/DD/YYYY HH:MM):");
-			String DateAndtime =dt.nextLine();
+			 DateAndtime=dt.nextLine();
 			System.out.println("Enter event location:");
-			String location=l.nextLine();
+			 location=l.nextLine();
 			if(E.Conflict(contact3, DateAndtime)) {
 				System.out.println("there is an event at the same time can not add an event");
 				break;
@@ -178,20 +184,20 @@ public class PhoneBook {
 				int choice3=input.nextInt();
 				if(choice3==1) {
 					System.out.println("Enter contact name:");
-					String Cname=cv.nextLine();
-					Contact contact4 = C.searchName(Cname,C);
+					 Cname=cv.nextLine();
+					Contact contact4 = C.searchName(Cname);
 					if(contact4==null) 
 						System.out.println("There is no contact in the list who has this event");
 					else {
 						System.out.println("The contact is found!");
-						E.searchByContactName(Cname);
+						E.searchByContactName(Cname,E);
 						break;
 					}
 				}
 					else if(choice3==2) {
 						System.out.println("Enter the event title");
 						 eventTitle=ev.nextLine();
-						 E.searchEventByEventTitle(eventTitle);
+						 E.searchEventByEventTitle(eventTitle,E);
 						break;
 					}
 					else
