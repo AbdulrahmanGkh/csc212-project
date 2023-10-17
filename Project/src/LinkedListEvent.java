@@ -1,7 +1,7 @@
 
 public class LinkedList<T> { // EVENT
-	private Node<T> head;
-	private Node<T> current;
+	public Node<T> head;
+	public Node<T> current;
 	public Event Data;
 	
 	public LinkedList() {
@@ -93,15 +93,17 @@ public class LinkedList<T> { // EVENT
 		if(isEmpty())
 			return;
 		current=head;
-		if(head.Data.getContact().getName().equalsIgnoreCase(name)) {
+		if(head.Data.getContact().getName().equalsIgnoreCase(name)) {// remove event is first element
 			head=head.next;
+			System.out.println("The event "+name +" is removed");
 			return;
 		}
 		Node<T> temp =head;
-		Node<T> current = head.next;
+		 current = head.next;
 		while(current!=null) { // remove an event that is not the first element
 			if(current.Data.getContact().getName().equalsIgnoreCase(name)) {
 				temp=current.next;
+				System.out.println("The event "+name +" is removed");
 				return;
 			}
 			temp =current;
@@ -109,44 +111,40 @@ public class LinkedList<T> { // EVENT
 		}
 	}
 
-public void searchEventByEventTitle(String eventTitle) {
-		if (head == null)
-			System.out.println("there is no contact");
-		Node<T> temp = head;
+public void searchEventByEventTitle(String eventTitle, LinkedList<T> E) {
+		E.findFirst();
 		boolean exist = false;
-		while(temp.next != null) {
-			if(temp.Data.getEventTitle().equalsIgnoreCase(eventTitle)) {
+		while(!E.last()) {
+			if(E.retrive().getEventTitle().equals(eventTitle)) {
 			System.out.println("Event found!");
-			System.out.println("Event Title "+ temp.Data.getEventTitle());
-			System.out.println("Contact name "+ temp.data.getName());
-			System.out.println("Event date and time "+temp.Data.getDateAndTime());
-			System.out.println("Event location "+ temp.Data.getLocation());
+			System.out.println("Event Title "+ E.retrive().getEventTitle());
+			System.out.println("Contact name "+ E.retrive().getContact().getName());
+			System.out.println("Event date and time "+E.retrive().getDateAndTime());
+			System.out.println("Event location "+ E.retrive().getLocation());
 			exist = true;
 			}
-			temp = temp.next;
+			E.findNext();
 		}
 		if (!exist)
 			System.out.println("There is no events");
 	}
 	
-	public void searchByContactName(String name) {
-		current= head; // try retriev
+	public void searchByContactName(String name,LinkedList<T> E) {
+		E.findFirst();
 		boolean exist = false;
-		while(current.next != null) {
-			if(current.Data.getContact().getName().equalsIgnoreCase(name)) { 
-				exist = true;
-				Event event = current.Data;
-				System.out.println("Event found!");
-				System.out.println("Event Title "+ event.getEventTitle());
-				System.out.println("Contact name "+ event.getContact().getName());
-				System.out.println("Event date and time "+event.getDateAndTime());
-				System.out.println("Event location "+ event.location);
+		while(!E.last()) {
+			if(E.retrive().getEventTitle().equals(name)) {
+			System.out.println("Event found!");
+			System.out.println("Event Title "+ E.retrive().getEventTitle());
+			System.out.println("Contact name "+ E.retrive().getContact().getName());
+			System.out.println("Event date and time "+E.retrive().getDateAndTime());
+			System.out.println("Event location "+ E.retrive().getLocation());
+			exist = true;
 			}
-			current = current.next;
-			
+			E.findNext();
 		}
 		if (!exist)
-			System.out.println("There is no events for "+name);
+			System.out.println("There is no events");
 	}
 	
 	public void printContactShareEvent(String title) {
