@@ -18,7 +18,7 @@ public class Event implements Comparable<Event> {
 		this.location = location;
 		this.contact=contact;
 	}
-
+@Override
 	public int compareTo(Event event)throws NullPointerException  {
 		if(this.eventTitle==null || event.eventTitle==null)
 			throw new NullPointerException("Please enter a valid name");
@@ -32,7 +32,7 @@ public class Event implements Comparable<Event> {
 			 return 1;// this means this.title<event
 		 }
 	}
-
+//setters and getters
 	public String getEventTitle() {
 		return eventTitle;
 	}
