@@ -19,7 +19,7 @@ public class Node <T>{
 		data=val;
 		next=null;
 	}
-
+	//setters and getters
 	public Node<T> getNext() {
 		return next;
 	}
