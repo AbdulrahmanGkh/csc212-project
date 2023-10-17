@@ -16,14 +16,7 @@ public class Event implements Comparable<Event> {
 		this.eventTitle = eventTitle;
 		this.DateAndTime=DateAndTime;
 		this.location = location;
-	}
-	
-	public Contact getContact() {
-		return contact;
-	}
-
-	public void setContact(Contact contact) {
-		this.contact = contact;
+		this.contact=contact;
 	}
 
 	public int compareTo(Event event)throws NullPointerException  {
@@ -61,6 +54,11 @@ public class Event implements Comparable<Event> {
 	public void setLocation(String location) {
 		this.location = location;
 	}
-	
+	public Contact getContact() {
+		return contact;
+	}
+	public void setContact(Contact contact) {
+		this.contact = contact;
+	}
 
 }
