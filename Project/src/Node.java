@@ -9,7 +9,7 @@ public class Node <T>{
 		data=null;
 		next=null;
 	}
-
+	
 	public Node(Event val) {
 		Data=val;
 		next=null;
@@ -28,8 +28,12 @@ public class Node <T>{
 		this.next = next;
 	}
 
-	public Contact getData() {
+	public Contact getdata() {
 		return data;
+	}
+	
+	public Event getData() {
+		return Data;
 	}
 
 	public void setData(Contact data) {
@@ -39,5 +43,8 @@ public class Node <T>{
 	public void setData(Event data) {
 		Data = data;
 	}
+	
+		
+	}
 
-}
+
