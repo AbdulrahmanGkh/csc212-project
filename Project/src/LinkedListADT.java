@@ -51,7 +51,7 @@ public class LinkedListADT <T extends Comparable<T>> {
 				head.next=temp;
 			}
 			else {
-				while(current.next!=null && val.compareTo(head.data) > 0) { // The name goes to its place alphabetically
+				while(current.next!=null && val.compareTo(current.next.data) > 0) { // The name goes to its place alphabetically
 					current=current.next;
 					 temp = current.next;
 					current.next = new Node<T>(val);
@@ -67,7 +67,7 @@ public class LinkedListADT <T extends Comparable<T>> {
 			return false;
 		Node<T> temp= head;
 		while(temp!=null) {
-			if(temp.getData().compareTo(val)==0) {
+			if(temp.data.compareTo(val)==0) {
 				current = temp;
 				return true;
 			}	
@@ -82,9 +82,9 @@ public class LinkedListADT <T extends Comparable<T>> {
 		 current = head;
 		 boolean exist=true;
 		 while(current != null) {
-			 String names = current.getData().getName();
+			 String names = current.data.getName();
 			 String first[]= names.split(" ");
-			if(first[0].equalsIgnoreCase(name)) {
+			if(first[0].equals(name)) {
 				System.out.println("Contacts found!");
 				System.out.println("Name: "+ current.data.getName());
 				System.out.println("Phone Number: "+ current.data.getPhoneNumber());
@@ -96,31 +96,30 @@ public class LinkedListADT <T extends Comparable<T>> {
 		 }		 
 	 } 
 	
-	public void addContact(String name,String phoneNumber,String emailAddres,String address,String birthday,String notes) { // big O(n)
+	public void addContact(String name,String phoneNumber,String emailAddres,String address,String birthday,String notes,LinkedListADT<T> C) { // big O(n)
 		Contact c = new Contact(name,phoneNumber,emailAddres,address,birthday,notes);
 		insertSort(c);
 	}
 	
-	public void removeContact(String name) {
-		LinkedList e = new LinkedList();// for removing the events connected with this contact
+	public void removeContact(String name,LinkedList<Event> E) {
 		if(isEmpty()) { // empty linked list
 			System.out.println("There is no contacts to remove");
 			return;
 		}
 		current =head;
-		if(head.data.getName().equalsIgnoreCase(name)) { // removing the head
+		if(head.data.getName().equals(name)) { // removing the head
 			head=head.next;
 			System.out.println("The name "+ name +" is removed");
-			e.removeEvent(name);// removing the events with the contact
+			E.removeEvent(name);// removing the events with the contact
 			return;
 		}
 		Node<T> temp=head;
-		Node<T> current = head.next;
+		 current = head.next;
 		while(current!=null) { // remove a contact that is not the first element
-			if(current.data.getName().equalsIgnoreCase(name)) {
+			if(current.data.getName().equals(name)) {
 				temp=current.next;
 				System.out.println("The name " + name +" is removed");
-				e.removeEvent(name);// removing the events with the contact
+				E.removeEvent(name);// removing the events with the contact
 				return;
 			}
 			temp =current;
@@ -129,95 +128,88 @@ public class LinkedListADT <T extends Comparable<T>> {
 	}
 		
 	
-	 public Contact searchName(String name) {// Big O(n)
-		if(head==null)
+	 public Contact searchName(String name,LinkedListADT<T> c) {// Big O(n)
+		 if(isEmpty())
 				return null;// there is no Contacts
-			Node<T> temp = head;
-			while(temp!=null) {
-				if(temp.data.getName().equalsIgnoreCase(name))
-					return temp.data;// return the contact with the same name
-				temp=temp.getNext();
-				}
-			return null;
-		}
+		 current=head;
+			while(current!=null) {
+				if(current.data.getName().equals(name))
+						return current.data;// return the contact with the same name
+				current=current.next;;
+					}
+			return null;// there is no contact with the same name
+	}
 	
-	 public Contact searchPhoneNB(String phoneNumber) { // Big O(n)
-	 	 if(head==null)
-	 			return null; // there is no Contacts
-	 		Node<T> temp = head;
-	 		while(temp!=null) {
-	 			if(temp.data.getPhoneNumber().equals(phoneNumber))
-						return temp.data;// return the contact with the same phone number
-	 			temp=temp.getNext();
-	 			}
-	 			return null;// there is no contract with the same phone number
-	 		}  
+	 public Contact searchPhoneNB(String phoneNumber,LinkedListADT<T> c) { // Big O(n)   phone number
+		if(isEmpty())
+				return null;// there is no Contacts
+		 current=head;
+			while(current!=null) {
+				if(current.data.getPhoneNumber().equals(phoneNumber))
+						return current.data;// return the contact with the same phone number
+				current=current.next;;
+					}
+			return null;// there is no contact with the same phone number
+	 }  
 	 
-	 public void searchEmail(String emailAddress) {// Big O(n)
-			if(head==null)
-				System.out.println("There is no contacts");// there is no Contacts
-			Node<T> temp = head;
+	 public void searchEmail(String emailAddress,LinkedListADT<T> c) {// Big O(n)
+		 c.findFirst();
 			boolean exist = false;// this is our indicator if there is any contacts with same email address or not
-			while(temp!=null) {
-				if(temp.data.getEmailAddress().equals(emailAddress)) {// to print every contact with the same email address
-					System.out.println("Contact found!");
-					System.out.println("Name:"+ temp.data.getName());
-					System.out.println("Phone Number: "+ temp.data.getPhoneNumber());
-					System.out.println("Email Address: "+ temp.data.getEmailAddress());
-					System.out.println("Address: "+ temp.data.getAddress());
-					System.out.println("Birthday:"+ temp.data.getBirthday());
-					System.out.println("Notes: "+ temp.data.getNotes());
+			while(c.current!=null) {
+				if(c.retrive().getEmailAddress().equals(emailAddress)) {// to print every contact with the same email address
 					exist=true;// we found contacts
+					System.out.println("Contact found!");
+					System.out.println("Name:"+ c.retrive().getName());
+					System.out.println("Phone Number: "+ c.retrive().getPhoneNumber());
+					System.out.println("Email Address: "+ c.retrive().getEmailAddress());
+					System.out.println("Address: "+ c.retrive().getAddress());
+					System.out.println("Birthday:"+ c.retrive().getBirthday());
+					System.out.println("Notes: "+ c.retrive().getNotes());
 				}
-				temp=temp.next;	
+				c.findNext();	
 			}
 			if(!exist)
 				System.out.println("There is no contact with the same email address ");
-		} 
+	} 
 	 
-	 public void searchAddress(String address) {// Big O(n)
-			if(head==null)
-				System.out.println("There is no contacts");// there is no Contacts
-			Node<T> temp = head;
-			boolean exist = false;// this is our indicator if there is any contacts with same  address or not
-			while(temp!=null) {
-				if(temp.data.getAddress().equals(address)) {// to print every contact with the same  address
-					System.out.println("Contact found!");
-					System.out.println("Name:"+ temp.data.getName());
-					System.out.println("Phone Number: "+ temp.data.getPhoneNumber());
-					System.out.println("Email Address: "+ temp.data.getEmailAddress());
-					System.out.println("Address: "+ temp.data.getAddress());
-					System.out.println("Birthday:"+ temp.data.getBirthday());
-					System.out.println("Notes: "+ temp.data.getNotes());
-					exist=true;// we found contacts
+	public void searchAddress(String address,LinkedListADT<T> c) {// Big O(n)
+		 c.findFirst();
+		boolean exist = false;// this is our indicator if there is any contacts with same  address or not
+		while(c.current!=null) {
+			if(c.retrive().getAddress().equals(address)) {// to print every contact with the same  address
+				exist=true;// we found contacts
+				System.out.println("Contact found!");
+				System.out.println("Name:"+ c.retrive().getName());
+				System.out.println("Phone Number: "+ c.retrive().getPhoneNumber());
+				System.out.println("Email Address: "+ c.retrive().getEmailAddress());
+				System.out.println("Address: "+ c.retrive().getAddress());
+				System.out.println("Birthday:"+ c.retrive().getBirthday());
+				System.out.println("Notes: "+ c.retrive().getNotes());
 				}
-				temp=temp.next;	
+					c.findNext();	
 			}
 			if(!exist)
 				System.out.println("There is no contact with the same address");
-		}
+	} 
 	 
-	 public void searchBirthday(String birthday) {// Big O(n)
-			if(head==null)
-				System.out.println("There is no contacts");// there is no Contacts
-			Node<T> temp = head;
-			boolean exist = false;// this is our indicator if there is any contacts with same  birth date or not
-			while(temp!=null) {
-				if(temp.data.getBirthday().equals(birthday)) {// to print every contact with the same  birth date
-					System.out.println("Contact found!");
-					System.out.println("Name:"+ temp.data.getName());
-					System.out.println("Phone Number: "+ temp.data.getPhoneNumber());
-					System.out.println("Email Address: "+ temp.data.getEmailAddress());
-					System.out.println("Address: "+ temp.data.getAddress());
-					System.out.println("Birthday:"+ temp.data.getBirthday());
-					System.out.println("Notes: "+ temp.data.getNotes());
-					exist=true;// we found contacts
+	public void searchBirthday(String birthday,LinkedListADT<T> c) {// Big O(n)
+		 c.findFirst();
+		boolean exist = false;// this is our indicator if there is any contacts with same  birthday or not
+		while(c.current!=null) {
+			if(c.retrive().getBirthday().equals(birthday)) {// to print every contact with the same  birthday
+				exist=true;// we found contacts
+				System.out.println("Contact found!");
+				System.out.println("Name:"+ c.retrive().getName());
+				System.out.println("Phone Number: "+ c.retrive().getPhoneNumber());
+				System.out.println("Email Address: "+ c.retrive().getEmailAddress());
+				System.out.println("Address: "+ c.retrive().getAddress());
+				System.out.println("Birthday:"+ c.retrive().getBirthday());
+				System.out.println("Notes: "+ c.retrive().getNotes());
 				}
-				temp=temp.next;	
+				c.findNext();	
 			}
 			if(!exist)
-				System.out.println("There is no contact with the same birth date ");
-		} 
-	 
-   }
+				System.out.println("There is no contact with the same birthday ");
+	} 
   
+}
