@@ -42,7 +42,7 @@ public class Contact implements Comparable<Contact> {
 			 return 1;// this means otherPerson>this.name
 		 }
 	}
-	
+	//setters and getters
 	public String getName(){
 		return name;
 	}
