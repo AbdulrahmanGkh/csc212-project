@@ -46,7 +46,6 @@ public class PhoneBook {
 	 Scanner b = new Scanner(System.in);
 	 Scanner nt = new Scanner(System.in);
 	 Scanner ev = new Scanner(System.in);
-	 Scanner cv = new Scanner(System.in);
 	 Scanner dt = new Scanner(System.in);
 	 Scanner l = new Scanner(System.in);
 	 String name;
@@ -56,10 +55,8 @@ public class PhoneBook {
 	 String birthday;
 	 String notes;
 	 String eventTitle;
-	 String cName;
 	 String DateAndtime;
 	 String location;
-	 String Cname;
 	 int choice;
 	 LinkedListADT<Contact> C = new LinkedListADT<Contact>();
 	 LinkedList <Event> E = new LinkedList<Event>();
@@ -88,7 +85,7 @@ public class PhoneBook {
 					break;
 				}
 				else {
-					C.addContact(name, phoneNumber, emailAddress, address, birthday, notes,C);
+					C.addContact(name, phoneNumber, emailAddress, address, birthday, notes);
 					System.out.println(" Contact added successfully! ");
 				break; }
 				
@@ -133,17 +130,17 @@ public class PhoneBook {
 				case 3:
 					System.out.println("Enter Email Address");
 					emailAddress=e.nextLine();
-					C.searchEmail(emailAddress);
+					C.searchEmail(emailAddress,C);
 					break;
 				case 4:
 					System.out.println("Enter Address");
 					address=a.nextLine();
-					C.searchAddress(address);
+					C.searchAddress(address,C);
 					break;
 				case 5:
 					System.out.println("Enter birthday");
 					birthday=b.nextLine();
-					C.searchBirthday(birthday);
+					C.searchBirthday(birthday,C);
 					break;
 				}
 				break;
@@ -160,10 +157,10 @@ public class PhoneBook {
 			System.out.println("Enter event title:");
 			 eventTitle=ev.nextLine();
 			System.out.println("Enter contact name:");
-			 cName=cv.nextLine();
-			Contact contact3 = C.searchName(cName);
+			 name=n.nextLine();
+			Contact contact3 = C.searchName(name);
 			if( contact3==null) {
-				System.out.println("There is no contact in the list do an event with them");
+				System.out.println("There is no contact in the list to do an event with them");
 				break;
 			}
 			System.out.println("Enter event date and time (MM/DD/YYYY HH:MM):");
@@ -184,13 +181,15 @@ public class PhoneBook {
 				int choice3=input.nextInt();
 				if(choice3==1) {
 					System.out.println("Enter contact name:");
-					 Cname=cv.nextLine();
-					Contact contact4 = C.searchName(Cname);
-					if(contact4==null) 
+					 name=n.nextLine();
+					Contact contact4 = C.searchName(name);
+					if(contact4==null) {
 						System.out.println("There is no contact in the list who has this event");
+						break;
+					}
 					else {
 						System.out.println("The contact is found!");
-						E.searchByContactName(Cname,E);
+						E.searchByContactName(name,E);
 						break;
 					}
 				}
