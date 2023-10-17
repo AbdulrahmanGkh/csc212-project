@@ -1,12 +1,12 @@
 
-public class LinkedList<T> { // EVENT
+public class LinkedList<T> {
 	public Node<T> head;
 	public Node<T> current;
 	
 	public LinkedList() {
 		head=current=null;
 	}
-	
+	// setters and getters
 	public boolean isEmpty() {// Big O(1)
 		return head==null;
 	}
@@ -38,7 +38,7 @@ public class LinkedList<T> { // EVENT
 		current.Data=val;
 	}
 	
-	private void insertANDSort(Event val) {
+	private void insertANDSort(Event val) {// Insert and sort at the same time to try to get the best case scenario
 		Node<T> temp;
 		if(isEmpty())
 			head=current=new Node<T>(val);
@@ -61,34 +61,34 @@ public class LinkedList<T> { // EVENT
 		}
 	}
 	
-	public boolean Conflict(Contact contact, String DateAndTime) {
+	public boolean Conflict(Contact contact, String DateAndTime) { // this methods takes the date and time and compare it to another events to make sure there is conflict
 		current=head;
 		while(current!=null) {
-			if(current.Data.getDateAndTime().equals(DateAndTime) && current.Data.getContact().equals(contact))
+			if(current.Data.getDateAndTime().equals(DateAndTime) && current.Data.getContact().equals(contact)) // comparing date and time to other events
 				return true; // there is a conflict so we can not schedule an event
 			current=current.next;
 		}
 		return false;
 	}
 	
-	public void printAlphabiticly() {
+	public void printAlphabiticly() {// this method print all events with alphabetical order
 		if(isEmpty()) {
 			System.out.println("There is no events");
 			return;
 			}
 		current = head;
 		while(current!=null) {
-			System.out.println("Title: " +current.Data.getEventTitle());
-			current = current.getNext();
+			System.out.println("Title: " +current.Data.getEventTitle()); // printing title
+			current = current.getNext(); // moving to the next element
 		}
 	}
 	
-	public void scheduleEvent(String eventTitle, String DateAndTime, String location, Contact contact) {
+	public void scheduleEvent(String eventTitle, String DateAndTime, String location, Contact contact) { // this method schedule an event
 		Event e = new Event(eventTitle,DateAndTime,location,contact);
 		insertANDSort(e);
 	}
 	
-	public void removeEvent(String name) {
+	public void removeEvent(String name) { // this method delete the event taking event title
 		if(isEmpty())
 			return;
 		current=head;
@@ -110,7 +110,7 @@ public class LinkedList<T> { // EVENT
 		}
 	}
 
-	public void searchEventByEventTitle(String eventTitle, LinkedList<T> E) {
+	public void searchEventByEventTitle(String eventTitle, LinkedList<T> E) {// this method search events by its title
 		current=head;
 		boolean exist = false;
 		while(current!=null) {
@@ -129,11 +129,11 @@ public class LinkedList<T> { // EVENT
 			System.out.println("There is no events");
 	}
 	
-	public void searchByContactName(String name,LinkedList<T> E) {
+	public void searchByContactName(String name,LinkedList<T> E) {// this method search events by its contact name
 		current=head;
-		boolean exist = false;
+		boolean exist = false;// this is our indicator if there is any events 
 		while(current!=null) {
-			exist = true;
+			exist = true; // we found an event
 			if(current.Data.getContact().getName().equals(name)) {
 				Event event = current.Data;
 				System.out.println("Event found!");
@@ -143,13 +143,13 @@ public class LinkedList<T> { // EVENT
 				System.out.println("Event location "+ event.getLocation());
 				
 			}
-			current=current.next;
+			current=current.next; 
 		}
 		if (!exist)
 			System.out.println("There is no events");
 	}
 	
-	public void printContactShareEvent(String title) {
+	public void printContactShareEvent(String title) { // this method print events who share the same event Title
 		current = head;
 		boolean exist = false; // check if event exist or not
 		boolean y = false; // printing in a different way for the frist time
